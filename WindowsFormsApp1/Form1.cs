@@ -192,10 +192,8 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string last;
-            last = textBox2.Text.Substring(textBox2.TextLength - 1);
-            string liczba;
-            liczba = maskedTextBox2.Text.Substring(maskedTextBox2.TextLength - 2);
+
+           
             
             richTextBox1.Text = "";
             //Sprawdzamy nazwisko
@@ -239,20 +237,7 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Wprowadź poprawną pocztę");
             }
             else walidacja++;
-            //Sprawdzamy pesel
-            if (!maskedTextBox1.MaskCompleted)
-            {
-                maskedTextBox1.BackColor = Color.Red;
-            }
-            else if (last == "a" && int.Parse(liczba) % 2 != 0)
-            {
-                maskedTextBox1.BackColor = Color.Red;
-            }
-            else if (last != "a" && int.Parse(liczba) % 2 == 0)
-            {
-                maskedTextBox1.BackColor = Color.Red;
-            }
-            else walidacja++;
+            
             //Sprawdzamy date urodzenia
             if (!maskedTextBox2.MaskCompleted) {
                 maskedTextBox2.BackColor = Color.Red;
@@ -270,9 +255,32 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Wprowadź poprawny numer telefonu");
             } else walidacja++;
 
-
+            if (walidacja > -1)
+            {
+                richTextBox1.Text =
+                    ("Deklaruje przystąpienie do egzaminu potwierdzającego kwalifikacje w zawodzie" +
+                    " przeprowadzanego w terminie " + comboBox1.Text + "\n\n");
+                richTextBox1.Text += ("Dane osobowe ucznia" + "\n");
+                richTextBox1.Text += ("Nazwisko: \t\t\t\t" + textBox1.Text + "\n");
+                richTextBox1.Text += ("Imię (imiona):\t\t\t" + textBox2.Text + "\n");
+                richTextBox1.Text += ("Data i miejsce urodzenia:\t" + maskedTextBox2.Text + " " + textBox4.Text + "\n");
+                richTextBox1.Text += ("Pesel: \t\t\t\t" + maskedTextBox1.Text + "\n\n");
+                richTextBox1.Text += ("Pesel: \t\t\t\t" + maskedTextBox1.Text + "\n");
+                richTextBox1.Text += ("Adres korespondecyjny\n");
+                richTextBox1.Text += ("Miejcowość: \t\t\t" + textBox6.Text + "\n");
+                richTextBox1.Text += ("Ulica i numer domu: \t\t" + textBox7.Text + "\n");
+                richTextBox1.Text += ("Kod pocztowy i poczta:\t\t" + maskedTextBox3.Text + ", " + textBox9 + "\n");
+                richTextBox1.Text += ("Nr telefonu z kierunkowym:\t" + maskedTextBox4.Text + "\n");
+                richTextBox1.Text += ("Mail: \t\t\t\t\t" + textBox11.Text + "\n\n\n");
+                richTextBox1.Text += ("Deklaruje przystąpienie do egzaminu " + (radioButton3.Checked ? "po raz kolejny" + 
+                    " do " + (checkBox1.Checked && checkBox2.Checked ? "częsci pisemnej i praktycznej" : checkBox1.Checked ? "częsci pisemnej" : "częsci praktycznej") 
+                    : "po raz pierwszy")
+                    + " do " + (checkBox1.Checked && checkBox2.Checked ? "częsci pisemnej i praktycznej" : checkBox1.Checked ? "częsci pisemnej" : "częsci praktycznej"));
+                richTextBox1.Text += ("\n\nOznaczenie kwalifikazji zgodnie z podstawą programową: " + comboBox2.Text + ".");
+            }
 
         }
+
 
         private void maskedTextBox2_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
         {
@@ -300,6 +308,11 @@ namespace WindowsFormsApp1
         }
 
         private void textBox11_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
 
         }
