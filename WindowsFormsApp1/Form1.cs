@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -233,7 +234,7 @@ namespace WindowsFormsApp1
             else walidacja++;
             if (textBox11.Text == "" || !textBox11.Text.Contains("@") )
             {
-                textBox9.BackColor = Color.Red;
+                textBox11.BackColor = Color.Red;
                 MessageBox.Show("Wprowadź poprawną pocztę");
             }
             else walidacja++;
@@ -255,32 +256,34 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Wprowadź poprawny numer telefonu");
             } else walidacja++;
 
-            if (walidacja > -1)
+            if (walidacja > 10)
             {
                 richTextBox1.Text =
                     ("Deklaruje przystąpienie do egzaminu potwierdzającego kwalifikacje w zawodzie" +
                     " przeprowadzanego w terminie " + comboBox1.Text + "\n\n");
                 richTextBox1.Text += ("Dane osobowe ucznia" + "\n");
-                richTextBox1.Text += ("Nazwisko: \t\t\t\t" + textBox1.Text + "\n");
-                richTextBox1.Text += ("Imię (imiona):\t\t\t" + textBox2.Text + "\n");
-                richTextBox1.Text += ("Data i miejsce urodzenia:\t" + maskedTextBox2.Text + " " + textBox4.Text + "\n");
+                richTextBox1.Text += ("Nazwisko: \t\t\t" + textBox2.Text + "\n");
+                richTextBox1.Text += ("Imię (imiona):\t\t\t" + textBox1.Text + "\n");
+                richTextBox1.Text += ("Data i miejsce urodzenia:\t\t" + maskedTextBox2.Text + " " + textBox4.Text + "\n");
                 richTextBox1.Text += ("Pesel: \t\t\t\t" + maskedTextBox1.Text + "\n\n");
-                richTextBox1.Text += ("Pesel: \t\t\t\t" + maskedTextBox1.Text + "\n");
                 richTextBox1.Text += ("Adres korespondecyjny\n");
                 richTextBox1.Text += ("Miejcowość: \t\t\t" + textBox6.Text + "\n");
                 richTextBox1.Text += ("Ulica i numer domu: \t\t" + textBox7.Text + "\n");
-                richTextBox1.Text += ("Kod pocztowy i poczta:\t\t" + maskedTextBox3.Text + ", " + textBox9 + "\n");
-                richTextBox1.Text += ("Nr telefonu z kierunkowym:\t" + maskedTextBox4.Text + "\n");
-                richTextBox1.Text += ("Mail: \t\t\t\t\t" + textBox11.Text + "\n\n\n");
-                richTextBox1.Text += ("Deklaruje przystąpienie do egzaminu " + (radioButton3.Checked ? "po raz kolejny" + 
+                richTextBox1.Text += ("Kod pocztowy i poczta:\t\t" + maskedTextBox3.Text + ", " + textBox9.Text + "\n");
+                richTextBox1.Text += ("Nr telefonu z kierunkowym:\t\t" + maskedTextBox4.Text + "\n");
+                richTextBox1.Text += ("Mail: \t\t\t\t" + textBox11.Text + "\n\n\n");
+                richTextBox1.Text += ("Deklaruje przystąpienie do egzaminu " + (radioButton3.Checked ? "po raz pierszy" + 
                     " do " + (checkBox1.Checked && checkBox2.Checked ? "częsci pisemnej i praktycznej" : checkBox1.Checked ? "częsci pisemnej" : "częsci praktycznej") 
-                    : "po raz pierwszy")
-                    + " do " + (checkBox1.Checked && checkBox2.Checked ? "częsci pisemnej i praktycznej" : checkBox1.Checked ? "częsci pisemnej" : "częsci praktycznej"));
-                richTextBox1.Text += ("\n\nOznaczenie kwalifikazji zgodnie z podstawą programową: " + comboBox2.Text + ".");
+                    : "po raz kolejny")
+                    + " do " + (checkBox1.Checked && checkBox2.Checked ? "częsci pisemnej i praktycznej." : checkBox1.Checked ? "częsci pisemnej." : "częsci praktycznej."));
+                richTextBox1.Text += ("\n\nOznaczenie kwalifikazji zgodnie z podstawą programową: " + comboBox2.Text + ".\n");
+                richTextBox1.Text += ("Nazwa klasyfikacji: " + label13.Text + ".\n\n");
+                richTextBox1.Text += ("Symbol cyfrowy zawodu: " + (radioButton1.Checked ? " 351203" : "351406") + "\n");
+                richTextBox1.Text += ("Nazwa zawodu: " + (radioButton1.Checked ? "technik informatyk" : "technik programista"));
+
             }
 
         }
-
 
         private void maskedTextBox2_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
         {
@@ -313,6 +316,37 @@ namespace WindowsFormsApp1
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox4.Text = "";
+            textBox6.Text = "";
+            textBox7.Text = "";
+            textBox9.Text = "";
+            textBox11.Text = "";
+            maskedTextBox1.Text = "";
+            maskedTextBox2.Text = "";
+            maskedTextBox3.Text = "";
+            maskedTextBox4.Text = "";
+            comboBox1.SelectionLength = 0;
+            comboBox2.SelectionLength = 0;
+            radioButton1.Checked = false;
+            radioButton2.Checked = false;
+            radioButton3.Checked = false;
+            radioButton4.Checked = false;
+            checkBox1.Checked = false;
+            comboBox1.SelectedText = String.Empty;
+            checkBox2.Checked = false;
+            label13.Text = "";
+            richTextBox1.Text = "";
+        }
+
+        private void button3_Click(object sender, EventArgs e)
         {
 
         }
